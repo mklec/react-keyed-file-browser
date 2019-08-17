@@ -1,9 +1,13 @@
-# react-keyed-file-browser
+# react-keyed-file-browser-clarin
 
 [![npm version](https://badge.fury.io/js/react-keyed-file-browser.svg)](http://badge.fury.io/js/react-keyed-file-browser)
 ![Downloads](http://img.shields.io/npm/dm/react-keyed-file-browser.svg?style=flat)
 
-Folder based file browser given a flat keyed list of objects, powered by React.
+Modified version of Folder based file browser given a flat keyed list of objects, powered by React.
+
+The oryginal version is available at https://www.npmjs.com/package/react-keyed-file-browser 
+
+The below description comes from the oryginal version of this package.
 
 ## Live Demo
 

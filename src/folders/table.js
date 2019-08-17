@@ -55,7 +55,7 @@ class RawTableFolder extends BaseFolder {
       name = (
         <div>
           <a onClick={this.toggleFolder}>
-            {icon}
+            {icon} folder
             {this.getName()}
           </a>
         </div>

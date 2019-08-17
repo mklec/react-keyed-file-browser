@@ -8,6 +8,12 @@ import BaseFile, { BaseFileConnectors } from './../base-file.js'
 import { fileSize } from './utils.js'
 
 class RawTableFile extends BaseFile {
+
+  dragStart = (url) => {
+      ev.dataTransfer.setData("message", url);
+    }
+ 
+
   render() {
     const {
       isDragging, isDeleting, isRenaming, isOver, isSelected,
@@ -83,13 +89,14 @@ class RawTableFile extends BaseFile {
         })}
         onClick={this.handleItemClick}
         onDoubleClick={this.handleItemDoubleClick}
+        
       >
         <td className="name">
           <div style={{ paddingLeft: (depth * 16) + 'px' }}>
             {draggable}
           </div>
         </td>
-        <td className="size">{fileSize(size)}</td>
+        <td className="size">wielkosc: {fileSize(size)}</td>
         <td className="modified">
           {typeof modified === 'undefined' ? '-' : Moment(modified, 'x').fromNow()}
         </td>

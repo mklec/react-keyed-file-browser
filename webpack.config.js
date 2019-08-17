@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'react-keyed-file-browser.js',
+    filename: 'react-keyed-file-browser-clarin.js',
     library: 'react-keyed-file-browser',
     libraryTarget: 'umd',
   },
