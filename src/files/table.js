@@ -9,8 +9,11 @@ import { fileSize } from './utils.js'
 
 class RawTableFile extends BaseFile {
 
-  dragStart = (url) => {
-      ev.dataTransfer.setData("message", url);
+  whendragStart = (event, url) => {
+      //ev.dataTransfer.setData("messagetest", {"mojawiadomość":ev.target});
+  
+   event.dataTransfer.setData("fileURL", url);
+  //console.log("przeciagam element :)" + event.dataTransfer)
     }
  
 
@@ -89,6 +92,7 @@ class RawTableFile extends BaseFile {
         })}
         onClick={this.handleItemClick}
         onDoubleClick={this.handleItemDoubleClick}
+        onDragStart={(event) => this.whendragStart(event, url)}
         
       >
         <td className="name">
@@ -96,7 +100,7 @@ class RawTableFile extends BaseFile {
             {draggable}
           </div>
         </td>
-        <td className="size">wielkosc: {fileSize(size)}</td>
+        <td className="size"> {fileSize(size)}</td>
         <td className="modified">
           {typeof modified === 'undefined' ? '-' : Moment(modified, 'x').fromNow()}
         </td>

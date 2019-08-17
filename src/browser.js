@@ -836,7 +836,6 @@ class RawFileBrowser extends React.Component {
         <div className="rendered-file-browser" ref={el => { this.browserRef = el }}>
           {this.props.showActionBar && this.renderActionBar(selectedItem)}
           <div className="files">
-            testowa wiadomosc
             {renderedFiles}
           </div>
         </div>
