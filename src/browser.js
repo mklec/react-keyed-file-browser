@@ -19,6 +19,8 @@ import { SortByName } from './sorters'
 
 import { isFolder } from './utils'
 
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+
 const SEARCH_RESULTS_PER_PAGE = 20
 
 function getItemProps(file, browserProps) {
@@ -94,6 +96,9 @@ class RawFileBrowser extends React.Component {
 
     onFolderOpen: PropTypes.func,
     onFolderClose: PropTypes.func,
+
+    onRightClickOnFile: PropTypes.func,
+
   }
 
   static defaultProps = {
@@ -131,6 +136,9 @@ class RawFileBrowser extends React.Component {
 
     onFolderOpen: (folder) => {}, // Folder opened
     onFolderClose: (folder) => {}, // Folder closed
+
+    onRightClickOnFile: (e, data, target) => {}, // right click on file in repo
+    
   }
 
   state = {
@@ -160,6 +168,23 @@ class RawFileBrowser extends React.Component {
   }
 
   getFile = (key) => this.props.files.find(f => f.key === key)
+
+  //obsluga klikniecia PP myszy
+  /*
+  handleRightClick = (e, data, target) => {
+        if (data.action === 'Added') {
+          console.log("ADDED: ")
+          console.log(data)
+          console.log(target)
+        }
+
+      if (data.action === 'Removed') {
+          console.log("REMOVED: ")
+          console.log(data)
+          console.log(target)
+      }
+  }
+  */
 
   // item manipulation
   createFiles = (files, prefix) => {
@@ -640,12 +665,19 @@ class RawFileBrowser extends React.Component {
 
       if (!isFolder(file)) {
         renderedFiles.push(
-          <FileRenderer
-            {...file}
-            {...thisItemProps}
-            browserProps={browserProps}
-            {...fileRendererProps}
-          />
+          <ContextMenuTrigger id={"DOPLIKU"} >
+          
+              <FileRenderer
+                  {...file}
+                  {...thisItemProps}
+                  browserProps={browserProps}
+                  {...fileRendererProps}
+                />
+        
+            
+        </ContextMenuTrigger>
+      
+          
         )
       } else {
         if (!this.state.nameFilter) {
@@ -832,12 +864,20 @@ class RawFileBrowser extends React.Component {
 
     return (
       <div className="rendered-react-keyed-file-browser">
+       
         {this.props.actions}
         <div className="rendered-file-browser" ref={el => { this.browserRef = el }}>
           {this.props.showActionBar && this.renderActionBar(selectedItem)}
           <div className="files">
+            
             {renderedFiles}
           </div>
+
+          <ContextMenu id={"DOPLIKU"}>
+              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Added' }}>Preview</MenuItem>
+              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Removed' }}>Remove</MenuItem>
+          </ContextMenu>
+
         </div>
         {this.state.previewFile !== null && (
           <this.props.detailRenderer
@@ -846,6 +886,7 @@ class RawFileBrowser extends React.Component {
             {...this.props.detailRendererProps}
           />
         )}
+
       </div>
     )
   }

@@ -9,12 +9,12 @@ import { fileSize } from './utils.js'
 
 class RawTableFile extends BaseFile {
 
+
+
   whendragStart = (event, url) => {
-      //ev.dataTransfer.setData("messagetest", {"mojawiadomość":ev.target});
-  
-   event.dataTransfer.setData("fileURL", url);
-  //console.log("przeciagam element :)" + event.dataTransfer)
-    }
+    //ev.dataTransfer.setData("messagetest", {"mojawiadomość":ev.target});
+    event.dataTransfer.setData("fileURL", url);
+  }
  
 
   render() {
@@ -68,6 +68,7 @@ class RawTableFile extends BaseFile {
           onClick={this.handleFileClick}
         >
           {icon}
+
           {this.getName()}
         </a>
       )
@@ -92,11 +93,11 @@ class RawTableFile extends BaseFile {
         })}
         onClick={this.handleItemClick}
         onDoubleClick={this.handleItemDoubleClick}
-        onDragStart={(event) => this.whendragStart(event, url)}
-        
+        onDragStart={(event) => this.whendragStart(event, url)}  
       >
         <td className="name">
           <div style={{ paddingLeft: (depth * 16) + 'px' }}>
+            
             {draggable}
           </div>
         </td>
