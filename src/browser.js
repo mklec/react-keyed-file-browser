@@ -169,23 +169,7 @@ class RawFileBrowser extends React.Component {
 
   getFile = (key) => this.props.files.find(f => f.key === key)
 
-  //obsluga klikniecia PP myszy
-  /*
-  handleRightClick = (e, data, target) => {
-        if (data.action === 'Added') {
-          console.log("ADDED: ")
-          console.log(data)
-          console.log(target)
-        }
-
-      if (data.action === 'Removed') {
-          console.log("REMOVED: ")
-          console.log(data)
-          console.log(target)
-      }
-  }
-  */
-
+ 
   // item manipulation
   createFiles = (files, prefix) => {
     this.setState(prevState => {
@@ -874,8 +858,8 @@ class RawFileBrowser extends React.Component {
           </div>
 
           <ContextMenu id={"DOPLIKU"}>
-              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Added' }}>Preview</MenuItem>
-              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Removed' }}>Remove</MenuItem>
+              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Preview' }}>Preview</MenuItem>
+              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Remove' }}>Remove</MenuItem>
           </ContextMenu>
 
         </div>
