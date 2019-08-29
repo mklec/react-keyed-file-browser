@@ -11,9 +11,10 @@ class RawTableFile extends BaseFile {
 
 
 
-  whendragStart = (event, url) => {
+  whendragStart = (event, url,size) => {
     //ev.dataTransfer.setData("messagetest", {"mojawiadomość":ev.target});
     event.dataTransfer.setData("fileURL", url);
+    event.dataTransfer.setData("fileSize", size);
   }
  
 
@@ -93,7 +94,7 @@ class RawTableFile extends BaseFile {
         })}
         onClick={this.handleItemClick}
         onDoubleClick={this.handleItemDoubleClick}
-        onDragStart={(event) => this.whendragStart(event, url)}  
+        onDragStart={(event) => this.whendragStart(event, url,size)}  
       >
         <td className="name">
           <div style={{ paddingLeft: (depth * 16) + 'px' }}>
