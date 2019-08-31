@@ -56,6 +56,7 @@ class RawFileBrowser extends React.Component {
       Rename: PropTypes.element,
       Loading: PropTypes.element,
       Download: PropTypes.element,
+      Upload: PropTypes.element,
     }),
 
     nestChildren: PropTypes.bool.isRequired,
@@ -86,6 +87,7 @@ class RawFileBrowser extends React.Component {
     onDeleteFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDeleteFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDownloadFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    onUploadFiles: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 
     onSelect: PropTypes.func,
     onSelectFile: PropTypes.func,
@@ -290,6 +292,15 @@ class RawFileBrowser extends React.Component {
     })
   }
 
+  uploadFiles = (key) => {
+    this.setState({
+      activeAction: null,
+      actionTarget: null,
+    }, () => {
+      this.props.onUploadFiles(key)
+    })
+  }
+
   // browser manipulation
   beginAction = (action, key) => {
     this.setState({
@@ -427,10 +438,20 @@ class RawFileBrowser extends React.Component {
       return stateChanges
     })
   }
+
+  // dowloading files
   handleActionBarDownloadClick = (event) => {
     event.preventDefault()
     this.downloadFile(this.state.selection)
   }
+
+  //uploading files
+  handleActionBarUploadFilesClick = (event) => {
+    event.preventDefault()
+    this.uploadFiles(this.state.selection)
+  }
+
+
   updateFilter = (newValue) => {
     this.setState({
       nameFilter: newValue,
@@ -528,6 +549,18 @@ class RawFileBrowser extends React.Component {
           !this.state.nameFilter
         ) {
           actions.push(
+            <li key="action-upload-files">
+              <a
+                onClick={this.handleActionBarUploadFilesClick}
+                href="#"
+                role="button"
+              >
+                {icons.Upload}
+                &nbsp;Upload files
+              </a>
+            </li>
+          );
+          actions.push(
             <li key="action-add-folder">
               <a
                 onClick={this.handleActionBarAddFolderClick}
@@ -538,7 +571,8 @@ class RawFileBrowser extends React.Component {
                 &nbsp;Add Subfolder
               </a>
             </li>
-          )
+          );
+          
         }
         if (
           selectedItem.keyDerived && (
