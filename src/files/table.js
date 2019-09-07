@@ -21,7 +21,7 @@ class RawTableFile extends BaseFile {
   render() {
     const {
       isDragging, isDeleting, isRenaming, isOver, isSelected,
-      action, url, browserProps, connectDragPreview,
+      action, url, fileId, browserProps, connectDragPreview,
       depth, size, modified,
     } = this.props
 
@@ -65,6 +65,7 @@ class RawTableFile extends BaseFile {
       name = (
         <a
           href={url || '#'}
+          fileId = {fileId}
           download="download"
           onClick={this.handleFileClick}
         >

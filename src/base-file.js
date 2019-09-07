@@ -7,6 +7,7 @@ class BaseFile extends React.Component {
   static propTypes = {
     fileKey: PropTypes.string,
     url: PropTypes.string,
+    fileId: PropTypes.string,
 
     newKey: PropTypes.string,
     isRenaming: PropTypes.bool,
