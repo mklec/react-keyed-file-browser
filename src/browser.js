@@ -683,7 +683,7 @@ class RawFileBrowser extends React.Component {
 
       if (!isFolder(file)) {
         renderedFiles.push(
-          <ContextMenuTrigger id={"DOPLIKU"} >
+          <ContextMenuTrigger id={"DOPLIKU"} holdToDisplay={-1} >
           
               <FileRenderer
                   {...file}
@@ -891,9 +891,8 @@ class RawFileBrowser extends React.Component {
             {renderedFiles}
           </div>
 
-          <ContextMenu id={"DOPLIKU"}>
+          <ContextMenu id={"DOPLIKU"} hideOnLeave={true}>
               <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Preview' }}>Preview</MenuItem>
-              <MenuItem onClick={this.props.onRightClickOnFile} data={{ action: 'Remove' }}>Remove</MenuItem>
           </ContextMenu>
 
         </div>
